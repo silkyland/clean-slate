@@ -116,6 +116,18 @@ If the repo already standardizes on `CLAUDE.md`/`AGENT.md`, write to that
 name instead. Every fact carries a citation; everything unverifiable is
 omitted — a thin true document beats a thick maybe-true one.
 
+Before presenting, run the **mechanical checks** — commands, not judgment
+calls; all must pass:
+
+1. `wc -l AGENTS.md` → **150 or less**; over budget = cut lines until it
+   passes, never present-and-apologize.
+2. Repo metadata (remotes, hosting, author) must match `git remote -v` /
+   git config output exactly — **never construct a GitHub/GitLab URL from
+   the repo's name**; no remote = say so.
+3. grep your own output for "convention": each needs 2+ citations, else
+   relabel as observation.
+4. Proportionality: the docs must not dwarf the code they describe.
+
 ## Step 8 — Report
 
 - **Deleted:** files removed, with backup location.
