@@ -1,3 +1,5 @@
+![clean-slate social preview](assets/social-preview.png)
+
 # clean-slate
 
 **Safe re-initialization of a project's agent knowledge — burn the rotten
