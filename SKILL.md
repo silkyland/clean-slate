@@ -115,8 +115,9 @@ Ask the user, ONE question, with a recommended answer:
 > Other options: a directory outside the repo, or no backup (git history
 > still has them) .
 
-Proceed only after an explicit answer. If the project is not under version
-control, treat "no backup" as unavailable — require a backup location.
+Proceed only after an explicit answer. **If the project is not under version
+control, treat "no backup" as unavailable** — require a backup location;
+deletion without backup and without git history is irreversible.
 
 ## Step 4 — Clean
 
@@ -202,3 +203,13 @@ calls; all must pass:
 - **Created:** the new files.
 - **Suggested follow-up:** for the next major feature, run **deep-plan** —
   clean-slate rebuilds what is; deep-plan designs what's next.
+
+## When things go wrong
+
+| Situation | Response |
+|-----------|----------|
+| Backup count check fails (Step 4) | Stop before deleting anything; fix the backup until counts match — never proceed on a failed count check |
+| Not a git repo and user chooses "no backup" | Refuse; require an explicit backup location — deletion without backup or git is irreversible |
+| User unavailable at backup gate (headless) | Take recommended backup (archive + git tag if available); verify counts; stop if backup fails — never delete unattended without verified backup |
+| Fresh read (Step 5) finds the repo is empty or trivial | Complete the skill with minimal docs; note in report that knowledge set reflects current minimal state |
+| Interview (Step 6) reveals the project is abandoned | Write docs reflecting current state; mark direction `UNCONFIRMED (abandoned)` in ROADMAP.md; suggest archival in report |
