@@ -18,6 +18,15 @@ that describe the past instead of pointing at the future.
 
 ## Question bank (pick what applies, in this order)
 
+0. **Salvage confirmations** — the Step 2 claims tagged
+   UNVERIFIABLE-FROM-CODE. Batch related ones into a single question
+   ("The old docs claimed: deploys are manual via <X>; PRs need two
+   reviews. Still true? Recommended: yes — nothing in the code contradicts
+   them"). These outrank the generic questions below: confirming a
+   hard-won old fact is worth more than a fresh guess. Whatever the
+   five-question budget cannot cover goes to ROADMAP.md **Open questions**
+   — never silently dropped.
+
 1. **Purpose check** — "The code suggests this project is <X for Y>. Is that
    still the goal, or has it shifted?" — anchors everything else.
 2. **Direction** — "For the next phase, which matters most: <A: stabilize
@@ -38,3 +47,8 @@ Condense the answers into a short **Direction Brief** (5–10 lines: goal,
 next-phase priority, architecture verdict, non-goals, house rules). Show it
 to the user for a yes/no confirmation, then use it to drive the ROADMAP.md
 phases and the AGENTS.md ground rules in Step 7.
+
+Headless (no user): do not invent answers. Derive the brief from the git
+trajectory and half-wired components, mark every line
+`UNCONFIRMED (headless)`, and copy each such line into ROADMAP.md
+**Open questions** for the next attended session.

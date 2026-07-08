@@ -21,13 +21,18 @@ more than rebuilding.
    cursor rules, architecture docs, roadmaps, old plans) and classifies each
    delete / keep / ask. Human docs (README, CHANGELOG, end-user docs) are
    never in scope.
-2. **Salvage** — mines the old files for load-bearing claims and re-verifies
-   each against the current code. Only claims with a fresh `file:line`
-   citation survive.
+2. **Salvage** — mines the old files for load-bearing claims and tags each
+   one: **verified** (fresh `file:line` citation — survives), **refuted**
+   (becomes a "common wrong assumption" warning), or **unverifiable from
+   code** (deploy quirks, house rules — carried to the interview or the
+   roadmap's open questions, never silently dropped).
 3. **Backup gate** ⛔ — presents the exact delete list and asks where to back
    it up (recommended: `docs/_archive/<date>/` + a git tag). **Nothing is
-   deleted without an explicit answer.**
-4. **Clean** — backs up, verifies the backup, deletes only the confirmed list.
+   deleted without an explicit answer.** Headless runs take the recommended
+   backup automatically — and if it can't be verified, they stop instead
+   of deleting.
+4. **Clean** — backs up, count-verifies the backup against the delete list
+   (a command, not a judgment call), deletes only the confirmed list.
 5. **Fresh read** — inventories the codebase from source: structure, wiring,
    data flow, git trajectory. Old docs are gone and are not trusted from
    memory.
@@ -35,7 +40,9 @@ more than rebuilding.
    question at a time, each with a recommended answer grounded in the code,
    five questions max.
 7. **Rebuild** — writes a strong, thin, fully-cited knowledge set:
-   `AGENTS.md` (under 150 lines), `docs/ARCHITECTURE.md`, `ROADMAP.md`.
+   `AGENTS.md` (under 150 lines), `docs/ARCHITECTURE.md`, `ROADMAP.md` —
+   including one anti-rot rule aimed at whatever made the old docs rot,
+   so the reset doesn't just reset the clock.
 8. **Report** — deleted / backed up / salvaged / dropped-as-false / created.
 
 The philosophy is shared with the [deep-plan](https://github.com/silkyland/deep-plan)

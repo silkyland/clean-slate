@@ -20,6 +20,10 @@ Loaded every session; every line must change agent behavior.
 <House rules from the interview + constraints proven by the code. Each with a why.>
 - Never <X> — <consequence> (`file:line` if from code).
 - Always <Y> before <Z>.
+- <Anti-rot rule from the Step 7 pre-mortem — counters THIS repo's observed
+  rot cause, e.g. "After every accepted plan, run deep-plan-ingest — the
+  old docs rotted because 3 plans shipped without ever landing here.">
+
 
 ## Common wrong assumptions
 
@@ -110,6 +114,10 @@ non-goals, house rules.>
 ## Open questions
 
 - [ ] <anything the interview left unresolved — with what would resolve it>
+- [ ] <UNVERIFIABLE-FROM-CODE salvage claims the question budget missed —
+      quoted, with their old source noted>
+- [ ] <every `UNCONFIRMED (headless)` Direction Brief line, if this was a
+      headless run — first attended session confirms or drops them>
 ```
 
 Status vocabulary: `done` / `in-progress` / `blocked` / `todo` / `dropped` —

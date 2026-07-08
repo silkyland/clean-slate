@@ -55,3 +55,19 @@ git log --format='%ad %h' --date=short -1 -- <file>   # last-touched date per fi
 ```
 
 List results with last-modified dates so the user can judge freshness.
+
+## CI-reference gate (run before presenting the delete list)
+
+Mechanical version of the "referenced by build/CI" rule — run it, do not
+eyeball it. For EVERY delete candidate:
+
+```bash
+grep -rln -F "<candidate-path>" \
+  .github/ .gitlab-ci.yml mkdocs.yml docusaurus.config.* \
+  package.json composer.json pyproject.toml Makefile Dockerfile \
+  2>/dev/null
+```
+
+Any hit → the candidate is reclassified **KEEP** (note which config
+references it). Zero hits → it stays a candidate. A file that CI builds,
+lints, or publishes is not agent knowledge, whatever its name says.
