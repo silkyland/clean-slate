@@ -1,0 +1,7 @@
+site_name: Widget Service Docs
+docs_dir: .
+nav:
+  - Home: README.md
+  - Architecture: docs/ARCHITECTURE.md
+theme:
+  name: material

@@ -64,10 +64,13 @@ Or copy this directory into your agent's skills folder
 ```
 clean-slate/
 ├── SKILL.md                              # 8-step workflow + safety rules
-└── references/
-    ├── knowledge-file-patterns.md        # What's in scope, what's untouchable
-    ├── interview-guide.md                # The direction interview question bank
-    └── rebuild-templates.md              # AGENTS.md / ARCHITECTURE.md / ROADMAP.md structures
+├── references/
+│   ├── knowledge-file-patterns.md        # What's in scope, what's untouchable
+│   ├── interview-guide.md                # The direction interview question bank
+│   └── rebuild-templates.md              # AGENTS.md / ARCHITECTURE.md / ROADMAP.md structures
+└── evals/
+    ├── scenarios.md                      # 3 manual eval scenarios (query + expected behavior)
+    └── fixtures/                         # Rotten-doc repos each scenario runs the skill against
 ```
 
 Follows the [Vercel skills](https://github.com/vercel-labs/skills) single-skill

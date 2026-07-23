@@ -63,10 +63,16 @@ eyeball it. For EVERY delete candidate:
 
 ```bash
 grep -rln -F "<candidate-path>" \
-  .github/ .gitlab-ci.yml mkdocs.yml docusaurus.config.* \
+  .github/ .gitlab-ci.yml mkdocs.yml \
+  docusaurus.config.js docusaurus.config.ts \
   package.json composer.json pyproject.toml Makefile Dockerfile \
   2>/dev/null
 ```
+
+List the config filenames explicitly rather than a `docusaurus.config.*`
+glob — under zsh an unmatched glob aborts the whole command before `grep`
+runs, silently skipping the gate. Missing files are harmless: `grep` just
+reports them to stderr, which `2>/dev/null` swallows.
 
 Any hit → the candidate is reclassified **KEEP** (note which config
 references it). Zero hits → it stays a candidate. A file that CI builds,

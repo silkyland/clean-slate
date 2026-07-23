@@ -78,6 +78,11 @@ Clean Slate Progress:
 
 ## Step 1 — Inventory the knowledge files
 
+Resolve the target first: if a `[project-root]` argument was given, treat
+that path as the repo root for every step below — including the deletion
+scope, which must never reach outside it; otherwise use the current working
+directory. State which one you used in the final report.
+
 Scan for agent-knowledge files using the patterns in
 [references/knowledge-file-patterns.md](references/knowledge-file-patterns.md).
 Before presenting anything, run the **CI-reference gate** (exact command in

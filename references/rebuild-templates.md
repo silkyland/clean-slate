@@ -6,6 +6,12 @@ versioned doc URL); anything unverifiable is omitted. **A thin true document
 beats a thick maybe-true one** — these files start minimal and grow only
 with evidence.
 
+## Contents
+
+- [AGENTS.md — hard budget: under 150 lines](#agentsmd--hard-budget-under-150-lines)
+- [docs/ARCHITECTURE.md](#docsarchitecturemd)
+- [ROADMAP.md](#roadmapmd)
+
 ## AGENTS.md — hard budget: under 150 lines
 
 Loaded every session; every line must change agent behavior.
