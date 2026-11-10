@@ -6,15 +6,21 @@ that describe the past instead of pointing at the future.
 
 ## Rules
 
-- **ONE question at a time.** Never a wall of questions.
+- **Ask only what changes the outcome.** If the code, the salvage pass, or
+  the invocation already answers a question, state the answer as an
+  assumption the user can override — do not spend a question on it.
 - **Every question carries your recommended answer** with a one-line reason,
   grounded in what you saw in the code (e.g. "Recommended: B — the git log
   shows the team already moving toward the module structure").
 - **Five questions maximum.** Stop earlier the moment direction, non-goals,
   and conventions are clear. If the user says "you decide", take your
   recommendation and record it as such in ROADMAP.md.
-- Skip any question the salvage pass or the code already answers — asking
-  what you already know erodes trust.
+- **One question at a time by default** — never a wall of unstructured
+  questions. When the host offers a structured question tool and the
+  remaining questions do not depend on each other's answers, batch them in
+  one call; each still carries its recommended answer.
+- Skip any question the salvage pass, the code, or the invocation already
+  answers — asking what you already know erodes trust.
 
 ## Question bank (pick what applies, in this order)
 
@@ -46,9 +52,13 @@ that describe the past instead of pointing at the future.
 Condense the answers into a short **Direction Brief** (5–10 lines: goal,
 next-phase priority, architecture verdict, non-goals, house rules). Show it
 to the user for a yes/no confirmation, then use it to drive the ROADMAP.md
-phases and the AGENTS.md ground rules in Step 7.
+phases and the AGENTS.md ground rules in Step 7. Record the brief, its
+confirmation status, and the count of `UNCONFIRMED` lines in
+`.clean-slate/state.md`.
 
-Headless (no user): do not invent answers. Derive the brief from the git
-trajectory and half-wired components, mark every line
-`UNCONFIRMED (headless)`, and copy each such line into ROADMAP.md
-**Open questions** for the next attended session.
+Headless (no user), or the user waived questions entirely ("just do it"):
+do not invent answers. Derive the brief from the git trajectory and
+half-wired components, mark every line `UNCONFIRMED (headless)` — or
+`UNCONFIRMED` when a user was present but declined to answer — and copy
+each such line into ROADMAP.md **Open questions** for the next attended
+session.

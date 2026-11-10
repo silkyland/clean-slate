@@ -19,18 +19,20 @@ more than rebuilding.
 
 1. **Inventory** — finds every agent-knowledge file (CLAUDE.md, AGENTS.md,
    cursor rules, architecture docs, roadmaps, old plans) and classifies each
-   delete / keep / ask. Human docs (README, CHANGELOG, end-user docs) are
-   never in scope.
+   delete / keep / ask. Human docs (README, CHANGELOG, end-user docs), code,
+   and anything a build/CI/docs-site config references are never in scope.
 2. **Salvage** — mines the old files for load-bearing claims and tags each
    one: **verified** (fresh `file:line` citation — survives), **refuted**
    (becomes a "common wrong assumption" warning), or **unverifiable from
    code** (deploy quirks, house rules — carried to the interview or the
    roadmap's open questions, never silently dropped).
 3. **Backup gate** ⛔ — presents the exact delete list and asks where to back
-   it up (recommended: `docs/_archive/<date>/` + a git tag). **Nothing is
-   deleted without an explicit answer.** Headless runs take the recommended
-   backup automatically — and if it can't be verified, they stop instead
-   of deleting.
+   it up (recommended: `docs/_archive/<date>/` + a git tag). The question is
+   only asked when the invocation didn't already authorize the reset — but
+   **nothing is ever deleted without a count-verified backup**: headless
+   runs and pre-authorized invocations take the recommended backup
+   automatically, and if it can't be verified, they stop instead of
+   deleting.
 4. **Clean** — backs up, count-verifies the backup against the delete list
    (a command, not a judgment call), deletes only the confirmed list.
 5. **Fresh read** — inventories the codebase from source: structure, wiring,
@@ -44,6 +46,10 @@ more than rebuilding.
    including one anti-rot rule aimed at whatever made the old docs rot,
    so the reset doesn't just reset the clock.
 8. **Report** — deleted / backed up / salvaged / dropped-as-false / created.
+
+Progress lives in `.clean-slate/state.md`, so an interrupted run resumes
+where it left off instead of restarting — and never re-asks a gate the
+user already answered.
 
 The philosophy is shared with the [deep-plan](https://github.com/silkyland/deep-plan)
 skill family: **no claim without evidence** — and additionally: **no deletion
@@ -63,9 +69,10 @@ Or copy this directory into your agent's skills folder
 
 ```
 clean-slate/
-├── SKILL.md                              # 8-step workflow + safety rules
+├── SKILL.md                              # 8-step workflow + safety rules + evidence tags
 ├── references/
-│   ├── knowledge-file-patterns.md        # What's in scope, what's untouchable
+│   ├── knowledge-file-patterns.md        # What's in scope, what's untouchable, CI-reference gate
+│   ├── state-file.md                     # .clean-slate/state.md — resume an interrupted run
 │   ├── interview-guide.md                # The direction interview question bank
 │   └── rebuild-templates.md              # AGENTS.md / ARCHITECTURE.md / ROADMAP.md structures
 └── evals/
@@ -85,11 +92,8 @@ layout and [Anthropic's skill authoring best practices](https://platform.claude.
 | [deep-plan-ingest](https://github.com/silkyland/deep-plan) | Distill an accepted plan into living knowledge files |
 | **clean-slate** | Reset rotten knowledge files — backup-gated |
 | [transform-my-repo](https://github.com/silkyland/transform-my-repo) | Change the architecture: migration feasibility + strategy |
-| [twin-my-site](https://github.com/silkyland/twin-my-site) | Extend the web product with a native mobile twin |
-| [jury-my-repo](https://github.com/silkyland/jury-my-repo) | Multi-agent adversarial audit with a verified verdict |
 | [love-me-love-my-docs](https://github.com/silkyland/love-me-love-my-docs) | A user manual that regenerates itself |
 | [seed-ah](https://github.com/silkyland/seed-ah) | Fake-but-production-like demo data with a manifest |
-| [create-my-team](https://github.com/silkyland/create-my-team) | Spawn and manage a subagent team for any mission |
 | [reproduce-my-bug](https://github.com/silkyland/reproduce-my-bug) | Prove the bug before anyone fixes it |
 
 Shared law: **no claim without evidence** — every skill in the family is

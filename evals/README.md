@@ -13,6 +13,9 @@ cp -r evals/fixtures/rotten-docs /tmp/cs-eval && cd /tmp/cs-eval
 /clean-slate .
 ```
 
+A run also creates `.clean-slate/state.md` in the copy (working memory for
+resuming) — harmless, it dies with the copy.
+
 ## Fixtures
 
 - `fixtures/rotten-docs/` — real Node code plus a `CLAUDE.md` and `ROADMAP.md`

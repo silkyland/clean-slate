@@ -6,6 +6,13 @@ versioned doc URL); anything unverifiable is omitted. **A thin true document
 beats a thick maybe-true one** — these files start minimal and grow only
 with evidence.
 
+Evidence discipline: a factual claim enters AGENTS.md or
+ARCHITECTURE.md only as **VERIFIED** (fresh `file:line` attached) or as
+**user-attested** direction/house rules (cite "user interview, <date>").
+UNVERIFIABLE-FROM-CODE salvage claims and UNVERIFIED fresh-read findings
+never appear as facts — they live in ROADMAP.md **Open questions** until a
+user or the code confirms them.
+
 ## Contents
 
 - [AGENTS.md — hard budget: under 150 lines](#agentsmd--hard-budget-under-150-lines)
@@ -50,9 +57,17 @@ happened — make it earn its lines.>
 ```
 
 Merge note: if the repo standardizes on `CLAUDE.md` or `AGENT.md`, write to
-that name instead — never create a second competing instructions file.
+that name instead — never create a second competing instructions file. If a
+canonical path was occupied by a kept file, follow the occupied-path rule
+in SKILL.md Step 7: merge into agent-knowledge occupants, write
+`<name>.agent.md` variants for human/CI-published ones, and link the actual
+paths here.
 
 ## docs/ARCHITECTURE.md
+
+(Canonical path — write to `docs/ARCHITECTURE.agent.md` instead when the
+canonical path is occupied by a kept human/CI-published doc; see the
+occupied-path rule in SKILL.md Step 7.)
 
 ```markdown
 # Architecture
@@ -84,6 +99,10 @@ not from memory of the deleted docs.>
 ### 1. <Reset baseline> (<date>)
 - **Decision:** knowledge rebuilt from source via clean-slate; prior docs archived at <backup location>.
 - **Why:** <one line — e.g. docs contradicted code in N places>.
+
+<Link any kept ADRs/decision records here (e.g. `adr/0001-use-postgres.md`)
+rather than absorbing or deleting them — they are history this doc points
+to.>
 
 <Append-only from here. New decisions get new numbers.>
 ```
@@ -122,8 +141,8 @@ non-goals, house rules.>
 - [ ] <anything the interview left unresolved — with what would resolve it>
 - [ ] <UNVERIFIABLE-FROM-CODE salvage claims the question budget missed —
       quoted, with their old source noted>
-- [ ] <every `UNCONFIRMED (headless)` Direction Brief line, if this was a
-      headless run — first attended session confirms or drops them>
+- [ ] <every `UNCONFIRMED` / `UNCONFIRMED (headless)` Direction Brief line —
+      first attended session confirms or drops them>
 ```
 
 Status vocabulary: `done` / `in-progress` / `blocked` / `todo` / `dropped` —
