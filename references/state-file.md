@@ -22,12 +22,14 @@ auth: <how the delete gate was satisfied: pre-authorized "<invocation quote>" | 
 mode: attended | headless
 
 ## Inventory
-| Path | Class (delete/keep/ask) | CI-ref hit | Note |
-|------|-------------------------|------------|------|
+| Path | Class (delete/keep/ask) | CI-ref hit | Modified | Note |
+|------|-------------------------|------------|----------|------|
 
 ## Salvage tally
 mined: <N> | VERIFIED: <n> | REFUTED: <n> | UNVERIFIABLE-FROM-CODE: <n>
-(claim-level detail stays in your working notes or a findings file under .clean-slate/)
+(claim-level detail in `.clean-slate/findings.md` — mandatory on Standard+
+runs and whenever the run may span sessions; short runs may keep it in
+working notes)
 
 ## Backup
 location: <archive path or "git only">
@@ -60,7 +62,9 @@ checks: <mechanical check results>
 
 A session that finds an existing state file:
 
-1. Reads it and notes `step` — the last **completed** step.
+1. Reads it and notes `step` — the last **completed** step. If `step` is
+   `done`, the run already reported: treat a resume request as a fresh
+   run — archive or delete the old state file and start at Step 1.
 2. Reconciles state with reality before acting: do the files classed
    delete still exist? Does the recorded backup exist and do its counts
    still match the delete list? The repo is the truth; if they disagree,
@@ -72,7 +76,9 @@ A session that finds an existing state file:
    `auth` and the backup record already answer Step 3. Before deleting any
    remaining files, re-run the count check anyway: it is one command and
    it is the only thing standing between a resume and an unverified
-   deletion.
+   deletion. Also re-run the CI-reference gate for any file not yet
+   deleted — a CI config added during the interruption may now reference
+   it.
 5. Re-opens any VERIFIED citation whose file changed since the state file
    was written (`git log` on the cited paths); without git, re-open them
    all. A citation that no longer matches is fixed and the claim re-tagged

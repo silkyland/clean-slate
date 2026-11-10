@@ -12,7 +12,8 @@ that describe the past instead of pointing at the future.
 - **Every question carries your recommended answer** with a one-line reason,
   grounded in what you saw in the code (e.g. "Recommended: B — the git log
   shows the team already moving toward the module structure").
-- **Five questions maximum.** Stop earlier the moment direction, non-goals,
+- **Five questions maximum** (the salvage-confirmation batch counts as
+  one). Stop earlier the moment direction, non-goals,
   and conventions are clear. If the user says "you decide", take your
   recommendation and record it as such in ROADMAP.md.
 - **One question at a time by default** — never a wall of unstructured

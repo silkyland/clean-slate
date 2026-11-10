@@ -69,8 +69,10 @@ This skill deletes files. Therefore:
    or authorization the invocation already gave ("reset it", "you may
    delete", "clean slate this repo"), which answers the gate in advance:
    do not ask again, take the recommended backup, verify the counts,
-   proceed. "The docs look stale" is a complaint, not permission; when in
-   doubt, ask. And no backup, no deletion — headless or not.
+   proceed. The skill's own name or slash-command is not authorization —
+   it must be an explicit statement beyond the invocation. "The docs
+   look stale" is a complaint, not permission; when in doubt, ask. And
+   no backup, no deletion — headless or not.
 2. **Never delete anything outside the confirmed delete list.** Files
    classed keep or ask are untouchable; ask defaults to KEEP.
 3. **Salvage before you burn.** Old files are read and mined for claims
@@ -88,7 +90,7 @@ If nobody can answer the gates (CI, another agent driving this skill),
 degrade honestly instead of inventing answers:
 
 - **Step 3 (backup gate):** take the recommended backup unprompted —
-  archive to `docs/_archive/<YYYY-MM-DD>/` plus `git tag pre-clean-slate` —
+  archive to `docs/_archive/<YYYY-MM-DD>/` plus `git tag pre-clean-slate-<YYYY-MM-DD>` —
   and run Step 4's count check. A verified backup is the ONLY thing that
   unlocks deletion; if it cannot be executed or the counts do not match,
   **stop before deleting anything** and report which check failed.
@@ -176,11 +178,14 @@ mined-claim count. Record the tally in the state file.
 ## Step 3 — Backup gate ⛔
 
 **If the invocation already authorized the reset** — "reset it", "clean
-slate", "you may delete", "wipe the old docs" — the gate is answered.
+slate this repo", "you may delete", "wipe the old docs" — the gate is
+answered.
 Record `auth: pre-authorized` in the state file, take the recommended
 backup below, and proceed to Step 4 without asking. Pre-authorization
 covers files classed **delete**; anything classed **ask** still defaults
-to KEEP unless the user says otherwise.
+to KEEP unless the user says otherwise. Any file the user adds to the
+delete list at this gate goes back through Step 2 salvage first — a file
+deleted without mining loses its claims.
 
 **If nobody can answer** (CI, another agent driving this skill), see
 Headless mode — same mechanics: recommended backup, count check, stop on
@@ -189,7 +194,7 @@ answer:**
 
 > These N files will be deleted: <list>. Back them up first?
 > **Recommended: yes — archive to `docs/_archive/<YYYY-MM-DD>/` and, if this
-> is a git repo, tag the current state (`git tag pre-clean-slate`).**
+> is a git repo, tag the current state (`git tag pre-clean-slate-<YYYY-MM-DD>`).**
 > Other options: a directory outside the repo, or no backup (git history
 > still has them).
 
@@ -201,9 +206,10 @@ without git history is irreversible.
 ## Step 4 — Clean
 
 Execute the chosen backup, then run the **count check** — a command, not a
-judgment call: the number of files in the archive must equal the number of
-files on the confirmed delete list (e.g. `find docs/_archive/<date> -type f | wc -l`
-vs the list length), and the git tag must show up in `git tag -l`. Counts
+judgment call: the archive's relative file list must equal the confirmed
+delete list's relative paths (e.g. `cd docs/_archive/<date> && find .
+-type f | sort` against the list — a flattened archive with matching
+counts still fails), and the git tag must show up in `git tag -l`. Counts
 match → delete the in-scope files. Counts differ → stop and fix the backup;
 **no deletion on a failed count check.** Nothing outside the confirmed list
 is touched. Record the backup location and count result in the state file.
@@ -215,7 +221,7 @@ entry points, wiring, data flow (write AND read path), git trajectory
 (~30 commits), and operational reality (deploy config, environments,
 background jobs — the knowledge that rots fastest). Classify components
 works / half-wired / dead, each with a proving file path — a suspicion you
-have not opened is UNVERIFIED, not a finding. **Old docs are gone and must
+have not opened is an unverified suspicion, not a finding. **Old docs are gone and must
 not be trusted from memory — if you recall a "fact" from a deleted file,
 it counts only if re-verified.**
 
@@ -273,7 +279,8 @@ actually rotted in THIS repo.
 Before presenting, run the **mechanical checks** — commands, not judgment
 calls; all must pass:
 
-1. `wc -l AGENTS.md` → **150 or less**; over budget = cut lines until it
+1. `wc -l <the chosen instructions file>` (AGENTS.md / CLAUDE.md / AGENT.md)
+   → **150 or less**; over budget = cut lines until it
    passes, never present-and-apologize.
 2. Repo metadata (remotes, hosting, author) must match `git remote -v` /
    git config output exactly — **never construct a GitHub/GitLab URL from

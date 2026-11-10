@@ -9,9 +9,9 @@ with evidence.
 Evidence discipline: a factual claim enters AGENTS.md or
 ARCHITECTURE.md only as **VERIFIED** (fresh `file:line` attached) or as
 **user-attested** direction/house rules (cite "user interview, <date>").
-UNVERIFIABLE-FROM-CODE salvage claims and UNVERIFIED fresh-read findings
-never appear as facts — they live in ROADMAP.md **Open questions** until a
-user or the code confirms them.
+UNVERIFIABLE-FROM-CODE salvage claims and unverified fresh-read
+suspicion never appear as facts — they live in ROADMAP.md **Open
+questions** until a user or the code confirms them.
 
 ## Contents
 
@@ -108,6 +108,10 @@ to.>
 ```
 
 ## ROADMAP.md
+
+(Canonical path — write to `docs/ROADMAP.agent.md` instead when the
+canonical path is occupied by a kept human/CI-published doc; see the
+occupied-path rule in SKILL.md Step 7.)
 
 ```markdown
 # Roadmap

@@ -67,6 +67,7 @@ fd -H -d 3 -t f '^(CLAUDE|AGENTS?|GEMINI)(\.local)?\.md$|^\.cursorrules$|^\.wind
 # Knowledge docs — every markdown file is a candidate for review
 # (excludes keep this skill's own state dir and past backups out of the results)
 fd -H -t f -e md --exclude '.clean-slate' --exclude 'docs/_archive' | head -50
+# if the count hits 50, raise or remove the cap — every markdown file is a candidate
 git log --format='%ad %h' --date=short -1 -- <file>   # last-touched date per file
 ```
 
@@ -79,7 +80,7 @@ find . -path ./.git -prune -o -type f \( \
   -o -name 'copilot-instructions.md' \) -print
 find . -path ./.git -prune -o -path './.clean-slate' -prune -o \
   -path './docs/_archive' -prune -o \
-  -type f -name '*.md' -print | head -50   # knowledge docs
+  -type f -name '*.md' -print | head -50   # knowledge docs (raise/remove cap at 50)
 ```
 
 Dir-based patterns (`.cursor/rules/**`, `.junie/**`, `.github/copilot-instructions.md`)
